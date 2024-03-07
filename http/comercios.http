@@ -1,0 +1,38 @@
+### /api/v1/comercios
+GET http://localhost:3000/api/v1/comercios
+
+### /api/v1/comercios/:id
+GET http://localhost:3000/api/v1/comercios/MICIF12345
+
+### /api/v1/comercios
+POST http://localhost:3000/api/v1/comercios
+Content-Type: application/json
+
+{
+  "nombre": "Mi Comercio",
+  "cif": "MICIF12345",
+  "direccion": "Calle Falsa 123",
+  "email": "micomercio@comercio.com",
+  "telefono": "+34123456789",
+  "id_pagina": 1
+}
+
+### /api/v1/comercios/:id
+PUT http://localhost:3000/api/v1/comercios/MICIF12345
+Content-Type: application/json
+
+{
+  "nombre": "Mi Comercio mejorado",
+  "email": "micomerciomejorado@comercio.com"
+}
+
+### /api/v1/comercios/:id (logico)
+DELETE http://localhost:3000/api/v1/comercios/MICIF12345
+
+### /api/v1/comercios/:id (fisico)
+DELETE http://localhost:3000/api/v1/comercios/MICIF12345
+Content-Type: application/json
+
+{
+  "tipo": "fisico"
+}
