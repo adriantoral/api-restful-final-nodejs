@@ -7,7 +7,8 @@ const comercio_schema = new mongoose.Schema(
             type: String
         },
         cif: {
-            type: String
+            type: String,
+            unique: true
         },
         direccion: {
             type: String

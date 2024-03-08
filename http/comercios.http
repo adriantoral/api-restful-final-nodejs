@@ -1,7 +1,7 @@
 ### /api/v1/comercios
 GET http://localhost:3000/api/v1/comercios
 
-### /api/v1/comercios?sort=cif
+### /api/v1/comercios?sortBy=cif
 GET http://localhost:3000/api/v1/comercios?sortBy=cif
 
 ### /api/v1/comercios/:id
