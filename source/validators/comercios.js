@@ -28,6 +28,17 @@ const create_comercio = [
 // Validadores para la actualización de comercios, todos los campos son opcionales
 const update_comercio = [
     param('id', 'Type: String').exists().notEmpty().isString(),
+    body('nombre', 'Type: String').notEmpty().isString(),
+    body('direccion', 'Type: String').notEmpty().isString(),
+    body('email', 'Type: String').notEmpty().isString(),
+    body('telefono', 'Type: String').notEmpty().isString(),
+    body('id_pagina', 'Type: Number').notEmpty().isInt(),
+    validate
+]
+
+// Validadores para la actualización parcial de comercios, todos los campos son opcionales
+const patch_comercio = [
+    param('id', 'Type: String').exists().notEmpty().isString(),
     body('nombre', 'Type: String').notEmpty().isString().optional(),
     body('direccion', 'Type: String').notEmpty().isString().optional(),
     body('email', 'Type: String').notEmpty().isString().optional(),
@@ -48,5 +59,6 @@ module.exports = {
     listar_comercios,
     create_comercio,
     update_comercio,
+    patch_comercio,
     delete_comercio
 }
