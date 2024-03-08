@@ -1,6 +1,9 @@
 ### /api/v1/comercios
 GET http://localhost:3000/api/v1/comercios
 
+### /api/v1/comercios?sort=cif
+GET http://localhost:3000/api/v1/comercios?sortBy=cif
+
 ### /api/v1/comercios/:id
 GET http://localhost:3000/api/v1/comercios/MICIF12345
 
@@ -27,12 +30,8 @@ Content-Type: application/json
 }
 
 ### /api/v1/comercios/:id (logico)
-DELETE http://localhost:3000/api/v1/comercios/MICIF12345
+DELETE http://localhost:3000/api/v1/comercios/MICIF12345?logico=true
 
 ### /api/v1/comercios/:id (fisico)
 DELETE http://localhost:3000/api/v1/comercios/MICIF12345
 Content-Type: application/json
-
-{
-  "tipo": "fisico"
-}

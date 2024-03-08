@@ -1,8 +1,11 @@
 const {Comercio} = require('../models')
 
-const listar_comercios = async () => {
+const listar_comercios = async (sortBy) => {
     try {
-        return await Comercio.find({}).sort({cif: 1})
+        const data = await Comercio.find({})
+        return sortBy ? data.sort((a, b) => {
+            return a[sortBy] < b[sortBy] ? 1 : -1
+        }) : data
     } catch (e) {
         return null
     }

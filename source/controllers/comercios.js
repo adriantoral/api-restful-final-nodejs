@@ -1,35 +1,30 @@
 const comercios_services = require('../services/comercios')
+const {res_handler} = require('../utils')
 
 const listar_comercios = async (req, res) => {
-    const data = await comercios_services.listar_comercios()
-    if (!data) return res.status(500).json({message: "Error al listar los comercios"})
-    res.send({data: data})
+    const data = await comercios_services.listar_comercios(req.MATCHED.sortBy)
+    return res_handler(res, data, 500, "Error al listar los comercios")
 }
 
 const listar_comercio = async (req, res) => {
     const data = await comercios_services.listar_comercio(req.MATCHED.id)
-    if (!data) return res.status(500).json({message: "Error al listar el comercio"})
-    res.send({data: data})
+    return res_handler(res, data, 500, "Error al listar el comercio")
 }
 
 const crear_comercio = async (req, res) => {
     const data = await comercios_services.crear_comercio(req.MATCHED)
-    if (!data) return res.status(500).json({message: "Error al crear el comercio"})
-    res.send({data: data})
+    return res_handler(res, data, 500, "Error al crear el comercio")
 }
 
 const editar_comercio = async (req, res) => {
     const {id, ...comercio} = req.MATCHED
     const data = await comercios_services.editar_comercio(id, comercio)
-    if (!data) return res.status(500).json({message: "Error al editar el comercio"})
-    res.send({data: data})
+    return res_handler(res, data, 500, "Error al editar el comercio")
 }
 
 const eliminar_comercio = async (req, res) => {
-    const {id, tipo} = req.MATCHED
-    const data = tipo === 'fisico' ? await comercios_services.eliminar_comercio(id) : await comercios_services.eliminar_comercio_logico(id)
-    if (!data) return res.status(500).json({message: "Error al eliminar el comercio"})
-    res.send({data: data})
+    const data = req.MATCHED.logico ? await comercios_services.eliminar_comercio_logico(req.MATCHED.id) : await comercios_services.eliminar_comercio(req.MATCHED.id)
+    return res_handler(res, data, 500, "Error al eliminar el comercio")
 }
 
 module.exports = {

@@ -1,11 +1,16 @@
-const {body, param} = require('express-validator')
+const {body, param, query} = require('express-validator')
 const {validate} = require('.')
 
 // Validador para coger el id de la URL y el tipo de eliminación
 // El tipo es solo para la ruta de eliminación, asi me evito duplicación de validadores
 const get_id = [
     param('id', 'Type: String').exists().notEmpty().isString(),
-    body('tipo', 'Type: String').notEmpty().isString().optional(),
+    validate
+]
+
+// Validador para listar comercios, solo se puede ordenar por un campo
+const listar_comercios = [
+    query('sortBy', 'Type: String').notEmpty().isString().optional(),
     validate
 ]
 
@@ -23,16 +28,25 @@ const create_comercio = [
 // Validadores para la actualización de comercios, todos los campos son opcionales
 const update_comercio = [
     param('id', 'Type: String').exists().notEmpty().isString(),
-    body('nombre', 'Type: String').optional().isString().optional(),
-    body('direccion', 'Type: String').optional().isString().optional(),
-    body('email', 'Type: String').optional().isString().optional(),
-    body('telefono', 'Type: String').optional().isString().optional(),
-    body('id_pagina', 'Type: Number').optional().isInt().optional(),
+    body('nombre', 'Type: String').notEmpty().isString().optional(),
+    body('direccion', 'Type: String').notEmpty().isString().optional(),
+    body('email', 'Type: String').notEmpty().isString().optional(),
+    body('telefono', 'Type: String').notEmpty().isString().optional(),
+    body('id_pagina', 'Type: Number').notEmpty().isInt().optional(),
+    validate
+]
+
+// Validadores para la eliminación de comercios
+const delete_comercio = [
+    param('id', 'Type: String').exists().notEmpty().isString(),
+    query('logico', 'Type: Boolean').default(false).optional(),
     validate
 ]
 
 module.exports = {
     get_id,
+    listar_comercios,
     create_comercio,
-    update_comercio
+    update_comercio,
+    delete_comercio
 }
