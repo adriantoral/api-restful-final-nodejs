@@ -23,8 +23,9 @@ router.post("/", comercios_validators.create_comercio, comercios_controllers.cre
 
 /*
 * Rutas para la actualización de un comercio.
-* He tratado el PUT como si fuese un PATCH para mayor flexibilidad en las peticiones.
-* Algunos campos como no son necesarios para actualizar, los he marcado como opcionales y seran ignorados sino se envian.
+* El PUT necesita todos los campos.
+* El PATCH solo necesita los campos que se quieran actualizar.
+* Ambos usan el mismo controlador.
 * */
 router.put("/:id", comercios_validators.update_comercio, comercios_controllers.editar_comercio)
 router.patch("/:id", comercios_validators.patch_comercio, comercios_controllers.editar_comercio)
