@@ -27,6 +27,7 @@ router.post("/", comercios_validators.create_comercio, comercios_controllers.cre
 * Algunos campos como no son necesarios para actualizar, los he marcado como opcionales y seran ignorados sino se envian.
 * */
 router.put("/:id", comercios_validators.update_comercio, comercios_controllers.editar_comercio)
+router.patch("/:id", comercios_validators.patch_comercio, comercios_controllers.editar_comercio)
 
 /*
 * Rutas para la eliminación de un comercio.

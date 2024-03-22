@@ -26,6 +26,18 @@ Content-Type: application/json
 
 {
   "nombre": "Mi Comercio mejorado",
+  "direccion": "Calle Falsa 123",
+  "email": "micomercio3@comercio.com",
+  "telefono": "+34123456789",
+  "id_pagina": 1
+}
+
+### /api/v1/comercios/:id
+PATCH http://localhost:3000/api/v1/comercios/MICIF12345
+Content-Type: application/json
+
+{
+  "nombre": "Mi Comercio mejorado",
   "email": "micomerciomejorado@comercio.com"
 }
 
