@@ -66,8 +66,8 @@ const listar_webs_ciudad_actividad = async (req, res) => {
  */
 const crear_resenia = async (req, res) => {
     try {
-        const {id, ...resenia} = req.MATCHED
-        return good_response(res, await webs_services.crear_resenia(id, resenia))
+        const {param, ...resenia} = req.MATCHED
+        return good_response(res, await webs_services.crear_resenia(param, resenia))
     } catch (error) {
         return bad_response(res, 500, error)
     }

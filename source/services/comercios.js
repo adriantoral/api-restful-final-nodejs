@@ -1,11 +1,11 @@
-const {Comercio} = require('../models')
-const jwt = require("jsonwebtoken")
+const {Comercio} = require('../models') // Importing the Comercio model
+const jwt = require("jsonwebtoken") // Importing the jsonwebtoken for generating tokens
 
 /**
- * Get a comercio by its CIF.
- * @async
- * @param {string} cif - The CIF of the comercio.
- * @returns {Promise} A promise that resolves to the comercio or throws an error.
+ * Function to get a specific comercio
+ * @param {String} cif - The CIF of the comercio
+ * @returns {Object} The comercio object
+ * @throws {Error} If there is an error
  */
 const get_comercio = async (cif) => {
     try {
@@ -16,10 +16,10 @@ const get_comercio = async (cif) => {
 }
 
 /**
- * List all comercios.
- * @async
- * @param {string} sortBy - The field to sort the comercios by.
- * @returns {Promise} A promise that resolves to the sorted comercios or all comercios if no sortBy is provided.
+ * Function to list all comercios
+ * @param {String} sortBy - The field to sort by
+ * @returns {Array} The list of comercios
+ * @throws {Error} If there is an error
  */
 const listar_comercios = async (sortBy) => {
     try {
@@ -28,79 +28,79 @@ const listar_comercios = async (sortBy) => {
             ? data.sort((a, b) => a[sortBy] < b[sortBy] ? 1 : -1)
             : data
     } catch (e) {
-        return null
+        throw new Error(e.message)
     }
 }
 
 /**
- * Get a comercio by its CIF.
- * @async
- * @param {string} cif - The CIF of the comercio.
- * @returns {Promise} A promise that resolves to the comercio or null if it does not exist.
+ * Function to list a specific comercio
+ * @param {String} cif - The CIF of the comercio
+ * @returns {Object} The comercio object
+ * @throws {Error} If there is an error
  */
 const listar_comercio = async (cif) => {
     try {
         return await get_comercio(cif)
     } catch (e) {
-        return null
+        throw new Error(e.message)
     }
 }
 
 /**
- * Create a comercio.
- * @async
- * @param {Object} comercio - The comercio to create.
- * @returns {Promise} A promise that resolves to the created comercio or null if there was an error.
+ * Function to create a comercio
+ * @param {Object} comercio - The comercio object
+ * @returns {Object} The created comercio object
+ * @throws {Error} If there is an error
  */
 const crear_comercio = async (comercio) => {
     try {
         const data = await Comercio.create(comercio)
         return {...data._doc, jwt: jwt.sign({id: data._id, cif: data.cif, tipo: "comercio"}, process.env.JWT_SECRET)}
     } catch (e) {
-        return null
+        throw new Error(e.message)
     }
 }
 
 /**
- * Update a comercio by its CIF.
- * @async
- * @param {string} cif - The CIF of the comercio.
- * @param {Object} comercio_nuevo - The new comercio data.
- * @returns {Promise} A promise that resolves to the updated comercio or null if there was an error.
+ * Function to edit a comercio
+ * @param {String} cif - The CIF of the comercio
+ * @param {Object} comercio_nuevo - The new comercio object
+ * @returns {Object} The updated comercio object
+ * @throws {Error} If there is an error
  */
 const editar_comercio = async (cif, comercio_nuevo) => {
     try {
         return await Comercio.findOneAndUpdate({cif: cif}, comercio_nuevo)
     } catch (e) {
-        return null
+        throw new Error(e.message)
     }
 }
 
 /**
- * Delete a comercio by its CIF.
- * @async
- * @param {string} cif - The CIF of the comercio.
- * @returns {Promise} A promise that resolves to the deleted comercio or null if there was an error.
+ * Function to delete a comercio
+ * @param {String} cif - The CIF of the comercio
+ * @returns {Object} The deleted comercio object
+ * @throws {Error} If there is an error
  */
 const eliminar_comercio = async (cif) => {
     try {
         return await Comercio.deleteOne({cif: cif})
     } catch (e) {
-        return null
+        throw new Error(e.message)
     }
 }
 
 /**
- * Logically delete a comercio by its CIF.
- * @async
- * @param {string} cif - The CIF of the comercio.
- * @returns {Promise} A promise that resolves to the deleted comercio or null if there was an error.
+ * Function to logically delete a comercio
+ * @param {String} cif - The CIF of the comercio
+ * @returns {Object} The deleted comercio object
+ * @throws {Error} If there is an error
  */
 const eliminar_comercio_logico = async (cif) => {
     try {
         return await Comercio.delete({cif: cif})
     } catch (e) {
-        return null
+        throw new Error(e.message)
     }
 }
 
