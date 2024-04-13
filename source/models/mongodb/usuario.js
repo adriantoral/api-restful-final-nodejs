@@ -1,18 +1,19 @@
 const mongoose = require("mongoose")
 const mongooseDelete = require("mongoose-delete")
 
-/*
-* Campos de la colección
-* ------------------------
-* Nombre: nombre del usuario
-* E-mail: email del usuario
-* Password: contraseña del usuario
-* Edad: edad del usuario
-* Ciudad: ciudad del usuario
-* Rol: rol del usuario (admin, usuario)
-* Intereses: intereses del usuario
-* PermiteRecibirOfertas: booleano que indica si el usuario quiere recibir ofertas
-* */
+/**
+ * Usuario Schema
+ * @module Usuario
+ * @typedef {Object} Usuario
+ * @property {string} nombre - The name of the usuario
+ * @property {string} email - The email of the usuario. It is unique.
+ * @property {string} password - The password of the usuario
+ * @property {number} edad - The age of the usuario
+ * @property {string} ciudad - The city of the usuario
+ * @property {string} rol - The role of the usuario. It can be "admin" or "usuario". Default is "usuario".
+ * @property {Array} intereses - The interests of the usuario
+ * @property {boolean} permiteRecibirOfertas - Indicates if the usuario wants to receive offers. Default is false.
+ */
 const usuario_schema = new mongoose.Schema(
     {
         nombre: {
@@ -49,5 +50,8 @@ const usuario_schema = new mongoose.Schema(
         versionKey: false
     }
 )
+
+// Enable soft delete
 usuario_schema.plugin(mongooseDelete, {overrideMethods: "all"})
+
 module.exports = mongoose.model("usuarios", usuario_schema)

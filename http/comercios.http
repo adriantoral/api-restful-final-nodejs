@@ -9,7 +9,7 @@ GET http://localhost:3000/api/v1/comercios/MICIF12345
 
 ### /api/v1/comercios
 POST http://localhost:3000/api/v1/comercios
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MWE1NWNkMmMyNTRkYTUxMjdiZjNlNSIsImVtYWlsIjoiYWRyaWFuLnRvcmFsQGxpdmUudS10YWQuY29tIiwiaWF0IjoxNzEzMDAzNzM0LCJleHAiOjE3MTMwOTAxMzR9.89oVpTZiON6hb3_E7QuftNa4JZIVeUUdLWz2jhDuHQE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MWE1NWNkMmMyNTRkYTUxMjdiZjNlNSIsImVtYWlsIjoiYWRyaWFuLnRvcmFsQGxpdmUudS10YWQuY29tIiwidGlwbyI6InVzdWFyaW8iLCJpYXQiOjE3MTMwMTAzODQsImV4cCI6MTcxMzA5Njc4NH0.lsak0UzHzSk0ohhRpHOV_AmdVpohly4LUVGRArpOkRo
 Content-Type: application/json
 
 {
@@ -17,26 +17,24 @@ Content-Type: application/json
   "cif": "MICIF12345",
   "direccion": "Calle Falsa 123",
   "email": "micomercio@comercio.com",
-  "telefono": "+34123456789",
-  "id_pagina": 1
+  "telefono": "+34123456789"
 }
 
 ### /api/v1/comercios/:id
 PUT http://localhost:3000/api/v1/comercios/MICIF12345
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MWE1NWNkMmMyNTRkYTUxMjdiZjNlNSIsImVtYWlsIjoiYWRyaWFuLnRvcmFsQGxpdmUudS10YWQuY29tIiwiaWF0IjoxNzEzMDAzNzM0LCJleHAiOjE3MTMwOTAxMzR9.89oVpTZiON6hb3_E7QuftNa4JZIVeUUdLWz2jhDuHQE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MWE1NWNkMmMyNTRkYTUxMjdiZjNlNSIsImVtYWlsIjoiYWRyaWFuLnRvcmFsQGxpdmUudS10YWQuY29tIiwidGlwbyI6InVzdWFyaW8iLCJpYXQiOjE3MTMwMTAzODQsImV4cCI6MTcxMzA5Njc4NH0.lsak0UzHzSk0ohhRpHOV_AmdVpohly4LUVGRArpOkRo
 Content-Type: application/json
 
 {
   "nombre": "Mi Comercio mejorado",
   "direccion": "Calle Falsa 123",
   "email": "micomercio3@comercio.com",
-  "telefono": "+34123456789",
-  "id_pagina": 1
+  "telefono": "+34123456789"
 }
 
 ### /api/v1/comercios/:id
 PATCH http://localhost:3000/api/v1/comercios/MICIF12345
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MWE1NWNkMmMyNTRkYTUxMjdiZjNlNSIsImVtYWlsIjoiYWRyaWFuLnRvcmFsQGxpdmUudS10YWQuY29tIiwiaWF0IjoxNzEzMDAzNzM0LCJleHAiOjE3MTMwOTAxMzR9.89oVpTZiON6hb3_E7QuftNa4JZIVeUUdLWz2jhDuHQE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MWE1NWNkMmMyNTRkYTUxMjdiZjNlNSIsImVtYWlsIjoiYWRyaWFuLnRvcmFsQGxpdmUudS10YWQuY29tIiwidGlwbyI6InVzdWFyaW8iLCJpYXQiOjE3MTMwMTAzODQsImV4cCI6MTcxMzA5Njc4NH0.lsak0UzHzSk0ohhRpHOV_AmdVpohly4LUVGRArpOkRo
 Content-Type: application/json
 
 {
@@ -46,9 +44,9 @@ Content-Type: application/json
 
 ### /api/v1/comercios/:id (logico)
 DELETE http://localhost:3000/api/v1/comercios/MICIF12345?logico=true
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MWE1NWNkMmMyNTRkYTUxMjdiZjNlNSIsImVtYWlsIjoiYWRyaWFuLnRvcmFsQGxpdmUudS10YWQuY29tIiwiaWF0IjoxNzEzMDAzNzM0LCJleHAiOjE3MTMwOTAxMzR9.89oVpTZiON6hb3_E7QuftNa4JZIVeUUdLWz2jhDuHQE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MWE1NWNkMmMyNTRkYTUxMjdiZjNlNSIsImVtYWlsIjoiYWRyaWFuLnRvcmFsQGxpdmUudS10YWQuY29tIiwidGlwbyI6InVzdWFyaW8iLCJpYXQiOjE3MTMwMTAzODQsImV4cCI6MTcxMzA5Njc4NH0.lsak0UzHzSk0ohhRpHOV_AmdVpohly4LUVGRArpOkRo
 
 ### /api/v1/comercios/:id (fisico)
 DELETE http://localhost:3000/api/v1/comercios/MICIF12345
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MWE1NWNkMmMyNTRkYTUxMjdiZjNlNSIsImVtYWlsIjoiYWRyaWFuLnRvcmFsQGxpdmUudS10YWQuY29tIiwiaWF0IjoxNzEzMDAzNzM0LCJleHAiOjE3MTMwOTAxMzR9.89oVpTZiON6hb3_E7QuftNa4JZIVeUUdLWz2jhDuHQE
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MWE1NWNkMmMyNTRkYTUxMjdiZjNlNSIsImVtYWlsIjoiYWRyaWFuLnRvcmFsQGxpdmUudS10YWQuY29tIiwidGlwbyI6InVzdWFyaW8iLCJpYXQiOjE3MTMwMTAzODQsImV4cCI6MTcxMzA5Njc4NH0.lsak0UzHzSk0ohhRpHOV_AmdVpohly4LUVGRArpOkRo
 Content-Type: application/json

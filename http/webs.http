@@ -1,0 +1,66 @@
+### /api/v1/webs
+GET http://localhost:3000/api/v1/webs
+
+### /api/v1/webs?sortBy=cif
+GET http://localhost:3000/api/v1/webs?sortBy=ciudad
+
+### /api/v1/webs/:id
+GET http://localhost:3000/api/v1/webs/661a7b3705f8c0fa0ea62aa4
+
+### /api/v1/webs
+POST http://localhost:3000/api/v1/webs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MWE3YWQxZDZmMzgwMjRlODkyOGYyOSIsImNpZiI6Ik1JQ0lGMTIzNDUiLCJ0aXBvIjoiY29tZXJjaW8iLCJpYXQiOjE3MTMwMTE0MDl9.2Y7ouEruELNfrD2V-Jyke5kchQpGqPVF53aK5CPkNbI
+Content-Type: application/json
+
+{
+  "ciudad": "Madrid",
+  "actividad": "Teconologia",
+  "titulo": "Telefonica",
+  "resumen": "Telefonica es una empresa de telecomunicaciones",
+  "textos": [
+    "Telefonica es una empresa de telecomunicaciones",
+    "Telefonica es una empresa de telecomunicaciones"
+  ],
+  "fotos": [
+    "https://www.telefonica.com/es/web/guest/home",
+    "https://www.telefonica.com/es/web/guest/home"
+  ]
+}
+
+### /api/v1/webs
+PUT http://localhost:3000/api/v1/webs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MWE3YWQxZDZmMzgwMjRlODkyOGYyOSIsImNpZiI6Ik1JQ0lGMTIzNDUiLCJ0aXBvIjoiY29tZXJjaW8iLCJpYXQiOjE3MTMwMTE0MDl9.2Y7ouEruELNfrD2V-Jyke5kchQpGqPVF53aK5CPkNbI
+Content-Type: application/json
+
+{
+  "ciudad": "Madrid",
+  "actividad": "Teconologia cambiada",
+  "titulo": "Telefonica",
+  "resumen": "Telefonica es una empresa de telecomunicaciones",
+  "textos": [
+    "Telefonica es una empresa de telecomunicaciones",
+    "Telefonica es una empresa de telecomunicaciones"
+  ],
+  "fotos": [
+    "https://www.telefonica.com/es/web/guest/home",
+    "https://www.telefonica.com/es/web/guest/home"
+  ]
+}
+
+### /api/v1/webs
+PATCH http://localhost:3000/api/v1/webs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MWE3YWQxZDZmMzgwMjRlODkyOGYyOSIsImNpZiI6Ik1JQ0lGMTIzNDUiLCJ0aXBvIjoiY29tZXJjaW8iLCJpYXQiOjE3MTMwMTE0MDl9.2Y7ouEruELNfrD2V-Jyke5kchQpGqPVF53aK5CPkNbI
+Content-Type: application/json
+
+{
+  "ciudad": "Barcelona",
+  "titulo": "Telefonica Cambiado"
+}
+
+### /api/v1/webs?logico=true (logico)
+DELETE http://localhost:3000/api/v1/webs?logico=true
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MWE3YWQxZDZmMzgwMjRlODkyOGYyOSIsImNpZiI6Ik1JQ0lGMTIzNDUiLCJ0aXBvIjoiY29tZXJjaW8iLCJpYXQiOjE3MTMwMTE0MDl9.2Y7ouEruELNfrD2V-Jyke5kchQpGqPVF53aK5CPkNbI
+
+### /api/v1/webs (fisico)
+DELETE http://localhost:3000/api/v1/webs
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MWE3YWQxZDZmMzgwMjRlODkyOGYyOSIsImNpZiI6Ik1JQ0lGMTIzNDUiLCJ0aXBvIjoiY29tZXJjaW8iLCJpYXQiOjE3MTMwMTE0MDl9.2Y7ouEruELNfrD2V-Jyke5kchQpGqPVF53aK5CPkNbI

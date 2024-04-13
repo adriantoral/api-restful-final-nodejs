@@ -1,80 +1,115 @@
 const {Comercio} = require('../models')
+const jwt = require("jsonwebtoken")
 
-/*
-* Listar comercios
-* Devuelve los comercios ordenados por el parametro sortBy, todos los datos sino se envia parametro y null si ha habido un error
-* */
+/**
+ * Get a comercio by its CIF.
+ * @async
+ * @param {string} cif - The CIF of the comercio.
+ * @returns {Promise} A promise that resolves to the comercio or throws an error.
+ */
+const get_comercio = async (cif) => {
+    try {
+        return await Comercio.findOne({cif: cif})
+    } catch (e) {
+        throw new Error(e.message)
+    }
+}
+
+/**
+ * List all comercios.
+ * @async
+ * @param {string} sortBy - The field to sort the comercios by.
+ * @returns {Promise} A promise that resolves to the sorted comercios or all comercios if no sortBy is provided.
+ */
 const listar_comercios = async (sortBy) => {
     try {
         const data = await Comercio.find({})
-        return sortBy ? data.sort((a, b) => {
-            return a[sortBy] < b[sortBy] ? 1 : -1
-        }) : data
+        return sortBy
+            ? data.sort((a, b) => a[sortBy] < b[sortBy] ? 1 : -1)
+            : data
     } catch (e) {
         return null
     }
 }
 
-/*
-* Lista un comercio por su cif
-* Devuelve el comercio o null si no existe
-* */
-const listar_comercio = async (id) => {
+/**
+ * Get a comercio by its CIF.
+ * @async
+ * @param {string} cif - The CIF of the comercio.
+ * @returns {Promise} A promise that resolves to the comercio or null if it does not exist.
+ */
+const listar_comercio = async (cif) => {
     try {
-        return await Comercio.findOne({cif: id})
+        return await get_comercio(cif)
     } catch (e) {
         return null
     }
 }
 
-/*
-* Crea un comercio
-* Devuelve el comercio creado o null si ha habido un error
-* */
+/**
+ * Create a comercio.
+ * @async
+ * @param {Object} comercio - The comercio to create.
+ * @returns {Promise} A promise that resolves to the created comercio or null if there was an error.
+ */
 const crear_comercio = async (comercio) => {
     try {
-        return await Comercio.create(comercio)
+        const data = await Comercio.create(comercio)
+        return {...data._doc, jwt: jwt.sign({id: data._id, cif: data.cif, tipo: "comercio"}, process.env.JWT_SECRET)}
     } catch (e) {
         return null
     }
 }
 
-/*
-* Edita un comercio por su cif
-* Actua como un PATCH y no como un PUT, ya que solo actualiza los campos que se envian.
-* */
-const editar_comercio = async (id, comercio_nuevo) => {
+/**
+ * Update a comercio by its CIF.
+ * @async
+ * @param {string} cif - The CIF of the comercio.
+ * @param {Object} comercio_nuevo - The new comercio data.
+ * @returns {Promise} A promise that resolves to the updated comercio or null if there was an error.
+ */
+const editar_comercio = async (cif, comercio_nuevo) => {
     try {
-        return await Comercio.findOneAndUpdate({cif: id}, comercio_nuevo)
+        return await Comercio.findOneAndUpdate({cif: cif}, comercio_nuevo)
     } catch (e) {
         return null
     }
 }
 
-/*
-* Elimina un comercio por su cif
-* Devuelve el comercio eliminado o null si ha habido un error
-* */
-const eliminar_comercio = async (id) => {
+/**
+ * Delete a comercio by its CIF.
+ * @async
+ * @param {string} cif - The CIF of the comercio.
+ * @returns {Promise} A promise that resolves to the deleted comercio or null if there was an error.
+ */
+const eliminar_comercio = async (cif) => {
     try {
-        return await Comercio.deleteOne({cif: id})
+        return await Comercio.deleteOne({cif: cif})
     } catch (e) {
         return null
     }
 }
 
-/*
-* Elimina un comercio por su cif de forma logica
-* Devuelve el comercio eliminado o null si ha habido un error
-* */
-const eliminar_comercio_logico = async (id) => {
+/**
+ * Logically delete a comercio by its CIF.
+ * @async
+ * @param {string} cif - The CIF of the comercio.
+ * @returns {Promise} A promise that resolves to the deleted comercio or null if there was an error.
+ */
+const eliminar_comercio_logico = async (cif) => {
     try {
-        return await Comercio.delete({cif: id})
+        return await Comercio.delete({cif: cif})
     } catch (e) {
         return null
     }
 }
 
 module.exports = {
-    listar_comercios, listar_comercio, crear_comercio, editar_comercio, eliminar_comercio, eliminar_comercio_logico
+    get_comercio,
+    listar_comercios,
+    listar_comercio,
+    crear_comercio,
+    editar_comercio,
+    eliminar_comercio,
+    eliminar_comercio_logico
 }
