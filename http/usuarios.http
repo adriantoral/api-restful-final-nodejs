@@ -24,3 +24,30 @@ Content-Type: application/json
   ],
   "permiteRecibirOfertas": true
 }
+
+### /api/v1/usuarios/signin
+POST http://localhost:3000/api/v1/usuarios/signin
+Content-Type: application/json
+
+{
+  "email": "usuario@usuario.com",
+  "password": "123456"
+}
+
+### /api/v1/usuarios/signup
+POST http://localhost:3000/api/v1/usuarios/signup
+Content-Type: application/json
+
+{
+  "nombre": "Usuario",
+  "email": "usuario@usuario.com",
+  "password": "123456",
+  "edad": 21,
+  "ciudad": "Madrid",
+  "rol": "usuario",
+  "intereses": [
+    "tecnologia",
+    "deportes"
+  ],
+  "permiteRecibirOfertas": true
+}

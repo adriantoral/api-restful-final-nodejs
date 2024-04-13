@@ -1,3 +1,9 @@
+# Token Comercio
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MWE4ZDhiYTgzYmY3NjQyYzA0OTRmNyIsImNpZiI6Ik1JQ0lGMTIzNDUiLCJ0aXBvIjoiY29tZXJjaW8iLCJpYXQiOjE3MTMwMTYyMDN9.NhkU1MKbt5zKOXTUWRoLINqFcC5Fn-JknadwyA2ljE0
+
+# Token Usuario
+#@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MWE4YzAwYTgzYmY3NjQyYzA0OTRkZCIsImVtYWlsIjoidXN1YXJpb0B1c3VhcmlvLmNvbSIsInRpcG8iOiJ1c3VhcmlvIiwiaWF0IjoxNzEzMDE1ODEzLCJleHAiOjE3MTMxMDIyMTN9.tWkHub16bOWjhZ-3tD_tNbBJXh8_vhwk5Eve8BCoJls
+
 ### /api/v1/webs
 GET http://localhost:3000/api/v1/webs
 
@@ -9,7 +15,7 @@ GET http://localhost:3000/api/v1/webs/661a7b3705f8c0fa0ea62aa4
 
 ### /api/v1/webs
 POST http://localhost:3000/api/v1/webs
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MWE3YWQxZDZmMzgwMjRlODkyOGYyOSIsImNpZiI6Ik1JQ0lGMTIzNDUiLCJ0aXBvIjoiY29tZXJjaW8iLCJpYXQiOjE3MTMwMTE0MDl9.2Y7ouEruELNfrD2V-Jyke5kchQpGqPVF53aK5CPkNbI
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
@@ -29,12 +35,12 @@ Content-Type: application/json
 
 ### /api/v1/webs
 PUT http://localhost:3000/api/v1/webs
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MWE3YWQxZDZmMzgwMjRlODkyOGYyOSIsImNpZiI6Ik1JQ0lGMTIzNDUiLCJ0aXBvIjoiY29tZXJjaW8iLCJpYXQiOjE3MTMwMTE0MDl9.2Y7ouEruELNfrD2V-Jyke5kchQpGqPVF53aK5CPkNbI
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
   "ciudad": "Madrid",
-  "actividad": "Teconologia cambiada",
+  "actividad": "Teconologia Mejorada",
   "titulo": "Telefonica",
   "resumen": "Telefonica es una empresa de telecomunicaciones",
   "textos": [
@@ -49,18 +55,18 @@ Content-Type: application/json
 
 ### /api/v1/webs
 PATCH http://localhost:3000/api/v1/webs
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MWE3YWQxZDZmMzgwMjRlODkyOGYyOSIsImNpZiI6Ik1JQ0lGMTIzNDUiLCJ0aXBvIjoiY29tZXJjaW8iLCJpYXQiOjE3MTMwMTE0MDl9.2Y7ouEruELNfrD2V-Jyke5kchQpGqPVF53aK5CPkNbI
+Authorization: Bearer {{token}}
 Content-Type: application/json
 
 {
   "ciudad": "Barcelona",
-  "titulo": "Telefonica Cambiado"
+  "titulo": "Telefonica Mejorada"
 }
 
 ### /api/v1/webs?logico=true (logico)
 DELETE http://localhost:3000/api/v1/webs?logico=true
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MWE3YWQxZDZmMzgwMjRlODkyOGYyOSIsImNpZiI6Ik1JQ0lGMTIzNDUiLCJ0aXBvIjoiY29tZXJjaW8iLCJpYXQiOjE3MTMwMTE0MDl9.2Y7ouEruELNfrD2V-Jyke5kchQpGqPVF53aK5CPkNbI
+Authorization: Bearer {{token}}
 
 ### /api/v1/webs (fisico)
 DELETE http://localhost:3000/api/v1/webs
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MWE3YWQxZDZmMzgwMjRlODkyOGYyOSIsImNpZiI6Ik1JQ0lGMTIzNDUiLCJ0aXBvIjoiY29tZXJjaW8iLCJpYXQiOjE3MTMwMTE0MDl9.2Y7ouEruELNfrD2V-Jyke5kchQpGqPVF53aK5CPkNbI
+Authorization: Bearer {{token}}
