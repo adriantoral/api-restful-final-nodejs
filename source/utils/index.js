@@ -1,3 +1,5 @@
+const {hook_errors} = require("../config/discordhooks")
+
 /**
  * Handler for response requests.
  * If data_validation does not exist, an error message is sent with the error code and error message.
@@ -35,6 +37,7 @@ const good_response = (res, data) => {
  * @returns {Promise<Response>} A promise that resolves to an Express response object.
  */
 const bad_response = async (res, error_code, error) => {
+    await hook_errors.error(error.name, error_code, error.message)
     return res.status(error_code).send({data: {errors: [error.message]}})
 }
 
