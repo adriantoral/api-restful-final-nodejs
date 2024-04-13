@@ -3,6 +3,8 @@ const express = require("express")
 const comercios_validators = require("../../validators/comercios")
 const comercios_controllers = require("../../controllers/comercios")
 
+const usuarios_middlewares = require("../../middlewares/usuarios")
+
 const router = express.Router()
 
 /*
@@ -19,7 +21,7 @@ router.get("/:id", comercios_validators.get_id, comercios_controllers.listar_com
 * Todos los campos son obligatorios.
 * Si no envias un campo se te devolverá un error.
 * */
-router.post("/", comercios_validators.create_comercio, comercios_controllers.crear_comercio)
+router.post("/", usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_administrador, comercios_validators.create_comercio, comercios_controllers.crear_comercio)
 
 /*
 * Rutas para la actualización de un comercio.
@@ -27,8 +29,8 @@ router.post("/", comercios_validators.create_comercio, comercios_controllers.cre
 * El PATCH solo necesita los campos que se quieran actualizar.
 * Ambos usan el mismo controlador.
 * */
-router.put("/:id", comercios_validators.update_comercio, comercios_controllers.editar_comercio)
-router.patch("/:id", comercios_validators.patch_comercio, comercios_controllers.editar_comercio)
+router.put("/:id", usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_administrador, comercios_validators.update_comercio, comercios_controllers.editar_comercio)
+router.patch("/:id", usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_administrador, comercios_validators.patch_comercio, comercios_controllers.editar_comercio)
 
 /*
 * Rutas para la eliminación de un comercio.
@@ -36,6 +38,6 @@ router.patch("/:id", comercios_validators.patch_comercio, comercios_controllers.
 * Ejemplo: .../comercios/:id?logico=true
 * Si no envias el parametro logico, se hará una eliminación física.
 * */
-router.delete("/:id", comercios_validators.delete_comercio, comercios_controllers.eliminar_comercio)
+router.delete("/:id", usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_administrador, comercios_validators.delete_comercio, comercios_controllers.eliminar_comercio)
 
 module.exports = router
