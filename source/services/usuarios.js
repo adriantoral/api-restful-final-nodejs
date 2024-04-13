@@ -69,9 +69,21 @@ const signup = async (usuario) => {
     }
 }
 
+const get_users = async (searchBy, sortBy) => {
+    try {
+        const data = await Usuario.find(searchBy)
+        return sortBy
+            ? data.sort((a, b) => a[sortBy] < b[sortBy] ? 1 : -1)
+            : data
+    } catch (e) {
+        throw new Error(e.message)
+    }
+}
+
 module.exports = {
     verificar_JWT,
     get_usuario,
     signin,
-    signup
+    signup,
+    get_users
 }

@@ -11,18 +11,45 @@ const global_validators = require("../../validators")
 const router = express.Router()
 
 /**
- * Routes for GET requests for webs.
+ * Route for getting all webs.
  * An additional parameter can be passed to sort the results.
+ * @name get_webs
+ * @route {GET} /webs
+ * @queryparam {string} [sortBy] - The field to sort by.
+ * @middleware {listar_doc} - Lists the documents.
+ * @controller {listar_webs} - Handles the request.
  */
 router.get('/', global_validators.listar_doc, webs_controllers.listar_webs)
+
+/**
+ * Route for getting a web by id.
+ * @name get_web
+ * @route {GET} /webs/:id
+ * @param {string} id - The id of the web.
+ * @middleware {get_id} - Validates the id.
+ * @controller {listar_web} - Handles the request.
+ */
 router.get('/:id', global_validators.get_id, webs_controllers.listar_web)
 
 /**
  * Route for creating a web.
  * All fields are mandatory.
  * If a field is not sent, an error will be returned.
+ * @name create_web
+ * @route {POST} /webs
+ * @middleware {verificar_JWT, is_comercio_JWT, no_tiene_pagina, create_update_web} - Validates the request.
+ * @controller {crear_web} - Handles the request.
  */
 router.post('/', usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_comercio_JWT, comercios_middlewares.no_tiene_pagina, webs_validators.create_update_web, webs_controllers.crear_web)
+
+/**
+ * Route for creating a review for a web.
+ * @name create_review
+ * @route {POST} /webs/:id/resenia
+ * @param {string} id - The id of the web.
+ * @middleware {verificar_JWT, is_usuario_JWT, get_id, create_resenia} - Validates the request.
+ * @controller {crear_resenia} - Handles the request.
+ */
 router.post('/:id/resenia', usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_usuario_JWT, global_validators.get_id, webs_validators.create_resenia, webs_controllers.crear_resenia)
 
 /**
@@ -30,14 +57,23 @@ router.post('/:id/resenia', usuarios_middlewares.verificar_JWT, usuarios_middlew
  * PUT requires all fields.
  * PATCH only requires the fields to be updated.
  * Both use the same controller.
+ * @name update_web
+ * @route {PUT|PATCH} /webs
+ * @middleware {verificar_JWT, is_comercio_JWT, tiene_pagina, create_update_web|patch_web} - Validates the request.
+ * @controller {editar_web} - Handles the request.
  */
 router.put('/', usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_comercio_JWT, comercios_middlewares.tiene_pagina, webs_validators.create_update_web, webs_controllers.editar_web)
 router.patch('/', usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_comercio_JWT, comercios_middlewares.tiene_pagina, webs_validators.patch_web, webs_controllers.editar_web)
 
 /**
- * Routes for deleting a web.
+ * Route for deleting a web.
  * An additional parameter can be passed for logical deletion.
  * If the logical parameter is not sent, a physical deletion will be performed.
+ * @name delete_web
+ * @route {DELETE} /webs
+ * @queryparam {boolean} [logico] - Whether to perform a logical deletion.
+ * @middleware {verificar_JWT, is_comercio_JWT, tiene_pagina, delete_doc} - Validates the request.
+ * @controller {eliminar_web} - Handles the request.
  */
 router.delete('/', usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_comercio_JWT, comercios_middlewares.tiene_pagina, global_validators.delete_doc, webs_controllers.eliminar_web)
 

@@ -33,6 +33,14 @@ const signup = async (req, res) => {
     }
 }
 
+const get_users = async (req, res) => {
+    try {
+        return good_response(res, await usuarios_services.get_users({ciudad: req.MATCHED.id, permiteRecibirOfertas: true}, req.MATCHED.sortBy))
+    } catch (error) {
+        return bad_response(res, 500, error)
+    }
+}
+
 module.exports = {
-    signin, signup
+    signin, signup, get_users
 }
