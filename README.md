@@ -58,6 +58,8 @@ npm install
 # El archivo .env debe contener:
 #   - PORT (Int)
 #   - MONGO_URI (MongoDB URI)
+#   - JWT_SECRET (String)
+#   - JWT_SESSION_EXPIRES_IN (Vercel MS)
 touch .env
 
 # Ejecutar la aplicación

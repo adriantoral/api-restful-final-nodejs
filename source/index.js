@@ -1,16 +1,13 @@
-const express = require("express")
-const cors = require("cors")
-const mongodb_connect = require("./config/mongodb")
+const app = require("./app")
 
-require("dotenv").config()
-const app = express()
-
-app.use(cors())
-app.use(express.json())
-app.use("/api/v1", require("./routes/v1"))
-
+/**
+ * The port on which the server will listen.
+ * @type {string}
+ */
 const port = process.env.PORT
-app.listen(port, () => {
-    console.log("Servidor escuchando en el puerto " + port)
-    mongodb_connect()
-})
+
+/**
+ * Starts the server and listens on the specified port.
+ * Logs a message to the console once the server is ready.
+ */
+app.listen(port, () => console.log("Servidor escuchando en el puerto " + port))
