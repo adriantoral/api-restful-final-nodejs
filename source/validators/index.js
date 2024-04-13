@@ -29,8 +29,8 @@ const pagination = [body('skip').default(0).toInt(), body('take').default(20).to
  * The type is only for the delete route, so I avoid duplicating validators
  */
 const get_id = [
-    param('id', 'Type: String').exists().notEmpty().isString(),
-    param('actividad', 'Type: String').exists().notEmpty().isString().optional(),
+    param('param', 'Type: String').exists().notEmpty().isString(),
+    param('param2', 'Type: String').exists().notEmpty().isString().optional(),
     validate
 ]
 

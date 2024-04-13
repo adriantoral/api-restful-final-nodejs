@@ -24,7 +24,7 @@ const listar_webs = async (req, res) => {
  */
 const listar_web = async (req, res) => {
     try {
-        return good_response(res, await webs_services.listar_web(req.MATCHED.id))
+        return good_response(res, await webs_services.listar_web(req.MATCHED.param))
     } catch (error) {
         return bad_response(res, 500, error)
     }
@@ -38,7 +38,7 @@ const listar_web = async (req, res) => {
  */
 const listar_webs_ciudad = async (req, res) => {
     try {
-        return good_response(res, await webs_services.listar_webs_ciudad(req.MATCHED.id, req.MATCHED.sortBy))
+        return good_response(res, await webs_services.listar_webs_ciudad(req.MATCHED.param, req.MATCHED.sortBy))
     } catch (error) {
         return bad_response(res, 500, error)
     }
@@ -52,7 +52,7 @@ const listar_webs_ciudad = async (req, res) => {
  */
 const listar_webs_ciudad_actividad = async (req, res) => {
     try {
-        return good_response(res, await webs_services.listar_webs_ciudad_actividad(req.MATCHED.id, req.MATCHED.actividad, req.MATCHED.sortBy))
+        return good_response(res, await webs_services.listar_webs_ciudad_actividad(req.MATCHED.param, req.MATCHED.param2, req.MATCHED.sortBy))
     } catch (error) {
         return bad_response(res, 500, error)
     }

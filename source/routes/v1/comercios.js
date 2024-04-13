@@ -23,12 +23,12 @@ router.get("/", global_validators.listar_doc, comercios_controllers.listar_comer
 /**
  * Route for getting a comercio by id.
  * @name get_comercio
- * @route {GET} /comercios/:id
+ * @route {GET} /comercios/:param
  * @param {string} id - The id of the comercio.
  * @middleware {get_id} - Validates the id.
  * @controller {listar_comercio} - Handles the request.
  */
-router.get("/:id", global_validators.get_id, comercios_controllers.listar_comercio)
+router.get("/:param", global_validators.get_id, comercios_controllers.listar_comercio)
 
 /**
  * Route for creating a comercio.
@@ -47,25 +47,25 @@ router.post("/", usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_usu
  * PATCH only requires the fields to be updated.
  * Both use the same controller.
  * @name update_comercio
- * @route {PUT|PATCH} /comercios/:id
+ * @route {PUT|PATCH} /comercios/:param
  * @param {string} id - The id of the comercio.
  * @middleware {verificar_JWT, is_usuario_JWT, is_administrador, get_id, update_comercio|patch_comercio} - Validates the request.
  * @controller {editar_comercio} - Handles the request.
  */
-router.put("/:id", usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_usuario_JWT, usuarios_middlewares.is_administrador, global_validators.get_id, comercios_validators.update_comercio, comercios_controllers.editar_comercio)
-router.patch("/:id", usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_usuario_JWT, usuarios_middlewares.is_administrador, global_validators.get_id, comercios_validators.patch_comercio, comercios_controllers.editar_comercio)
+router.put("/:param", usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_usuario_JWT, usuarios_middlewares.is_administrador, global_validators.get_id, comercios_validators.update_comercio, comercios_controllers.editar_comercio)
+router.patch("/:param", usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_usuario_JWT, usuarios_middlewares.is_administrador, global_validators.get_id, comercios_validators.patch_comercio, comercios_controllers.editar_comercio)
 
 /**
  * Route for deleting a comercio.
  * An additional parameter can be passed for logical deletion.
  * If the logical parameter is not sent, a physical deletion will be performed.
  * @name delete_comercio
- * @route {DELETE} /comercios/:id
+ * @route {DELETE} /comercios/:param
  * @param {string} id - The id of the comercio.
  * @queryparam {boolean} [logico] - Whether to perform a logical deletion.
  * @middleware {verificar_JWT, is_usuario_JWT, is_administrador, get_id, delete_doc} - Validates the request.
  * @controller {eliminar_comercio} - Handles the request.
  */
-router.delete("/:id", usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_usuario_JWT, usuarios_middlewares.is_administrador, global_validators.get_id, global_validators.delete_doc, comercios_controllers.eliminar_comercio)
+router.delete("/:param", usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_usuario_JWT, usuarios_middlewares.is_administrador, global_validators.get_id, global_validators.delete_doc, comercios_controllers.eliminar_comercio)
 
 module.exports = router

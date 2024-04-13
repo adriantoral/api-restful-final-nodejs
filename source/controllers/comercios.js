@@ -21,7 +21,7 @@ const listar_comercios = async (req, res) => {
  * @returns {Promise} A promise that resolves to a response handler with the data or an error message.
  */
 const listar_comercio = async (req, res) => {
-    const data = await comercios_services.listar_comercio(req.MATCHED.id)
+    const data = await comercios_services.listar_comercio(req.MATCHED.param)
     return res_handler(res, data, 500, "Error al listar el comercio")
 }
 
@@ -61,7 +61,7 @@ const editar_comercio = async (req, res) => {
  * @returns {Promise} A promise that resolves to a response handler with the data or an error message.
  */
 const eliminar_comercio = async (req, res) => {
-    const data = req.MATCHED.logico ? await comercios_services.eliminar_comercio_logico(req.MATCHED.id) : await comercios_services.eliminar_comercio(req.MATCHED.id)
+    const data = req.MATCHED.logico ? await comercios_services.eliminar_comercio_logico(req.MATCHED.param) : await comercios_services.eliminar_comercio(req.MATCHED.param)
     return res_handler(res, data, 500, "Error al eliminar el comercio")
 }
 

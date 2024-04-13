@@ -10,7 +10,7 @@ GET http://localhost:3000/api/v1/comercios
 ### /api/v1/comercios?sortBy=cif
 GET http://localhost:3000/api/v1/comercios?sortBy=cif
 
-### /api/v1/comercios/:id
+### /api/v1/comercios/:param
 GET http://localhost:3000/api/v1/comercios/MICIF12345
 
 ### /api/v1/comercios
@@ -26,7 +26,7 @@ Content-Type: application/json
   "telefono": "+34123456789"
 }
 
-### /api/v1/comercios/:id
+### /api/v1/comercios/:param
 PUT http://localhost:3000/api/v1/comercios/MICIF12345
 Authorization: Bearer {{token}}
 Content-Type: application/json
@@ -38,7 +38,7 @@ Content-Type: application/json
   "telefono": "+34123456789"
 }
 
-### /api/v1/comercios/:id
+### /api/v1/comercios/:param
 PATCH http://localhost:3000/api/v1/comercios/MICIF12345
 Authorization: Bearer {{token}}
 Content-Type: application/json
@@ -48,11 +48,11 @@ Content-Type: application/json
   "email": "micomerciomejorado2@comercio.com"
 }
 
-### /api/v1/comercios/:id (logico)
+### /api/v1/comercios/:param (logico)
 DELETE http://localhost:3000/api/v1/comercios/MICIF12345?logico=true
 Authorization: Bearer {{token}}
 
-### /api/v1/comercios/:id (fisico)
+### /api/v1/comercios/:param (fisico)
 DELETE http://localhost:3000/api/v1/comercios/MICIF12345
 Authorization: Bearer {{token}}
 Content-Type: application/json

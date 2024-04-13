@@ -34,12 +34,12 @@ router.post('/signup', usuarios_validators.signup, usuarios_controllers.signup)
 /**
  * Route for getting users by city id.
  * @name get_users
- * @route {GET} /ciudad/:id
+ * @route {GET} /ciudad/:param
  * @param {String} id - The id of the city.
  * @middleware {get_id} - Validates the id.
  * @middleware {listar_doc} - Lists the documents.
  * @controller {get_users} - Handles the user's request.
  */
-router.get('/ciudad/:id', global_validators.get_id, global_validators.listar_doc, usuarios_controllers.get_users)
+router.get('/ciudad/:param', global_validators.get_id, global_validators.listar_doc, usuarios_controllers.get_users)
 
 module.exports = router

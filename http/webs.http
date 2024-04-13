@@ -10,13 +10,13 @@ GET http://localhost:3000/api/v1/webs
 ### /api/v1/webs?sortBy=cif
 GET http://localhost:3000/api/v1/webs?sortBy=ciudad
 
-### /api/v1/webs/:id
+### /api/v1/webs/:param
 GET http://localhost:3000/api/v1/webs/661a7b3705f8c0fa0ea62aa4
 
-### /api/v1/webs/ciudad/:id
+### /api/v1/webs/ciudad/:param
 GET http://localhost:3000/api/v1/webs/ciudad/Madrid
 
-### /api/v1/webs/ciudad/:id/:actividad
+### /api/v1/webs/ciudad/:param/:param2
 GET http://localhost:3000/api/v1/webs/ciudad/Madrid/Teconologia
 
 ### /api/v1/webs

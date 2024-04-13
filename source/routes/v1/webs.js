@@ -24,33 +24,33 @@ router.get('/', global_validators.listar_doc, webs_controllers.listar_webs)
 /**
  * Route for getting a web by id.
  * @name get_web
- * @route {GET} /webs/:id
+ * @route {GET} /webs/:param
  * @param {string} id - The id of the web.
  * @middleware {get_id} - Validates the id.
  * @controller {listar_web} - Handles the request.
  */
-router.get('/:id', global_validators.get_id, webs_controllers.listar_web)
+router.get('/:param', global_validators.get_id, webs_controllers.listar_web)
 
 /**
  * Route for getting webs by city id.
  * @name get_webs_ciudad
- * @route {GET} /webs/ciudad/:id
+ * @route {GET} /webs/ciudad/:param
  * @param {string} id - The id of the city.
  * @middleware {get_id, listar_doc} - Validates the id and lists the documents.
  * @controller {listar_webs_ciudad} - Handles the request.
  */
-router.get('/ciudad/:id', global_validators.get_id, global_validators.listar_doc, webs_controllers.listar_webs_ciudad)
+router.get('/ciudad/:param', global_validators.get_id, global_validators.listar_doc, webs_controllers.listar_webs_ciudad)
 
 /**
  * Route for getting webs by city id and activity.
  * @name get_webs_ciudad_actividad
- * @route {GET} /webs/ciudad/:id/:actividad
+ * @route {GET} /webs/ciudad/:param/:param2
  * @param {string} id - The id of the city.
  * @param {string} actividad - The activity of the web.
  * @middleware {get_id, listar_doc} - Validates the id and lists the documents.
  * @controller {listar_webs_ciudad_actividad} - Handles the request.
  */
-router.get('/ciudad/:id/:actividad', global_validators.get_id, global_validators.listar_doc, webs_controllers.listar_webs_ciudad_actividad)
+router.get('/ciudad/:param/:param2', global_validators.get_id, global_validators.listar_doc, webs_controllers.listar_webs_ciudad_actividad)
 
 /**
  * Route for creating a web.
@@ -66,12 +66,12 @@ router.post('/', usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_com
 /**
  * Route for creating a review for a web.
  * @name create_review
- * @route {POST} /webs/:id/resenia
+ * @route {POST} /webs/:param/resenia
  * @param {string} id - The id of the web.
  * @middleware {verificar_JWT, is_usuario_JWT, get_id, create_resenia} - Validates the request.
  * @controller {crear_resenia} - Handles the request.
  */
-router.post('/:id/resenia', usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_usuario_JWT, global_validators.get_id, webs_validators.create_resenia, webs_controllers.crear_resenia)
+router.post('/:param/resenia', usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_usuario_JWT, global_validators.get_id, webs_validators.create_resenia, webs_controllers.crear_resenia)
 
 /**
  * Routes for updating a web.
