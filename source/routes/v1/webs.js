@@ -32,6 +32,27 @@ router.get('/', global_validators.listar_doc, webs_controllers.listar_webs)
 router.get('/:id', global_validators.get_id, webs_controllers.listar_web)
 
 /**
+ * Route for getting webs by city id.
+ * @name get_webs_ciudad
+ * @route {GET} /webs/ciudad/:id
+ * @param {string} id - The id of the city.
+ * @middleware {get_id, listar_doc} - Validates the id and lists the documents.
+ * @controller {listar_webs_ciudad} - Handles the request.
+ */
+router.get('/ciudad/:id', global_validators.get_id, global_validators.listar_doc, webs_controllers.listar_webs_ciudad)
+
+/**
+ * Route for getting webs by city id and activity.
+ * @name get_webs_ciudad_actividad
+ * @route {GET} /webs/ciudad/:id/:actividad
+ * @param {string} id - The id of the city.
+ * @param {string} actividad - The activity of the web.
+ * @middleware {get_id, listar_doc} - Validates the id and lists the documents.
+ * @controller {listar_webs_ciudad_actividad} - Handles the request.
+ */
+router.get('/ciudad/:id/:actividad', global_validators.get_id, global_validators.listar_doc, webs_controllers.listar_webs_ciudad_actividad)
+
+/**
  * Route for creating a web.
  * All fields are mandatory.
  * If a field is not sent, an error will be returned.

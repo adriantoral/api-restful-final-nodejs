@@ -1,10 +1,13 @@
 const {validationResult, body, param, query, matchedData} = require("express-validator")
 
-/*
-* Funcion para activar los validadores.
-* Si hay errores, se envía un mensaje de error con los errores.
-* Si no hay errores, se guardan los datos matcheados en req.MATCHED y se llama a next.
-* */
+/**
+ * Function to activate the validators.
+ * If there are errors, an error message is sent with the errors.
+ * If there are no errors, the matched data is saved in req.MATCHED and next is called.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @param {Function} next - The next middleware function.
+ */
 const validate = (req, res, next) => {
     try {
         validationResult(req).throw()
@@ -15,26 +18,33 @@ const validate = (req, res, next) => {
     }
 }
 
-/*
-* Validador para la paginación.
-* Ignorada porque no hay paginacion en la API.
-* */
+/**
+ * Validator for pagination.
+ * Ignored because there is no pagination in the API.
+ */
 const pagination = [body('skip').default(0).toInt(), body('take').default(20).toInt(), validate]
 
-// Validador para coger el id de la URL y el tipo de eliminación
-// El tipo es solo para la ruta de eliminación, asi me evito duplicación de validadores
+/**
+ * Validator to get the id from the URL and the type of deletion
+ * The type is only for the delete route, so I avoid duplicating validators
+ */
 const get_id = [
     param('id', 'Type: String').exists().notEmpty().isString(),
+    param('actividad', 'Type: String').exists().notEmpty().isString().optional(),
     validate
 ]
 
-// Validador para listar comercios, solo se puede ordenar por un campo
+/**
+ * Validator for listing comercios, can only be sorted by one field
+ */
 const listar_doc = [
     query('sortBy', 'Type: String').notEmpty().isString().optional(),
     validate
 ]
 
-// Validadores para la eliminación de documentos
+/**
+ * Validators for the deletion of documents
+ */
 const delete_doc = [
     query('logico', 'Type: Boolean').default(false).optional(),
     validate

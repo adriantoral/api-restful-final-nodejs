@@ -13,6 +13,12 @@ GET http://localhost:3000/api/v1/webs?sortBy=ciudad
 ### /api/v1/webs/:id
 GET http://localhost:3000/api/v1/webs/661a7b3705f8c0fa0ea62aa4
 
+### /api/v1/webs/ciudad/:id
+GET http://localhost:3000/api/v1/webs/ciudad/Madrid
+
+### /api/v1/webs/ciudad/:id/:actividad
+GET http://localhost:3000/api/v1/webs/ciudad/Madrid/Teconologia
+
 ### /api/v1/webs
 POST http://localhost:3000/api/v1/webs
 Authorization: Bearer {{token}}

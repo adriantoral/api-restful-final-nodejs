@@ -32,6 +32,43 @@ const listar_web = async (id) => {
 }
 
 /**
+ * Lists all the webs in a specific city sorted by the provided parameter.
+ * @param {string} ciudad - The city of the webs.
+ * @param {string} sortBy - The parameter to sort by.
+ * @returns {Promise<Array>} A promise that resolves to an array of webs.
+ * @throws {Error} If an error occurs during database operation.
+ */
+const listar_webs_ciudad = async (ciudad, sortBy) => {
+    try {
+        const data = await Web.find({ciudad: ciudad})
+        return sortBy
+            ? data.sort((a, b) => a[sortBy] < b[sortBy] ? 1 : -1)
+            : data
+    } catch (e) {
+        throw new Error(e.message)
+    }
+}
+
+/**
+ * Lists all the webs in a specific city and activity sorted by the provided parameter.
+ * @param {string} ciudad - The city of the webs.
+ * @param {string} actividad - The activity of the webs.
+ * @param {string} sortBy - The parameter to sort by.
+ * @returns {Promise<Array>} A promise that resolves to an array of webs.
+ * @throws {Error} If an error occurs during database operation.
+ */
+const listar_webs_ciudad_actividad = async (ciudad, actividad, sortBy) => {
+    try {
+        const data = await Web.find({ciudad: ciudad, actividad: actividad})
+        return sortBy
+            ? data.sort((a, b) => a[sortBy] < b[sortBy] ? 1 : -1)
+            : data
+    } catch (e) {
+        throw new Error(e.message)
+    }
+}
+
+/**
  * Creates a review for a specific web.
  * @param {string} id - The ID of the web.
  * @param {Object} resenia - The review to be added.
@@ -106,6 +143,8 @@ const eliminar_web_logico = async (id) => {
 module.exports = {
     listar_webs,
     listar_web,
+    listar_webs_ciudad,
+    listar_webs_ciudad_actividad,
     crear_resenia,
     crear_web,
     editar_web,

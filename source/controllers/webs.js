@@ -31,6 +31,34 @@ const listar_web = async (req, res) => {
 }
 
 /**
+ * Lists all the webs in a specific city sorted by the provided parameter.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns {Promise} A promise that resolves to a response object.
+ */
+const listar_webs_ciudad = async (req, res) => {
+    try {
+        return good_response(res, await webs_services.listar_webs_ciudad(req.MATCHED.id, req.MATCHED.sortBy))
+    } catch (error) {
+        return bad_response(res, 500, error)
+    }
+}
+
+/**
+ * Lists all the webs in a specific city and activity sorted by the provided parameter.
+ * @param {Object} req - The request object.
+ * @param {Object} res - The response object.
+ * @returns {Promise} A promise that resolves to a response object.
+ */
+const listar_webs_ciudad_actividad = async (req, res) => {
+    try {
+        return good_response(res, await webs_services.listar_webs_ciudad_actividad(req.MATCHED.id, req.MATCHED.actividad, req.MATCHED.sortBy))
+    } catch (error) {
+        return bad_response(res, 500, error)
+    }
+}
+
+/**
  * Creates a review for a specific web.
  * @param {Object} req - The request object.
  * @param {Object} res - The response object.
@@ -97,6 +125,8 @@ const eliminar_web = async (req, res) => {
 module.exports = {
     listar_webs,
     listar_web,
+    listar_webs_ciudad,
+    listar_webs_ciudad_actividad,
     crear_resenia,
     crear_web,
     editar_web,
