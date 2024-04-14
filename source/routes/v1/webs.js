@@ -18,6 +18,18 @@ const router = express.Router()
  * @queryparam {string} [sortBy] - The field to sort by.
  * @middleware {listar_doc} - Lists the documents.
  * @controller {listar_webs} - Handles the request.
+ *
+ *  @openapi
+ * /api/v1/webs:
+ *  get:
+ *      tags:
+ *      - Webs
+ *      summary: List all webs
+ *      responses:
+ *          '200':
+ *              description: Returns the data
+ *          '500':
+ *              description: Wrong petition
  */
 router.get('/', global_validators.listar_doc, webs_controllers.listar_webs)
 
@@ -28,6 +40,25 @@ router.get('/', global_validators.listar_doc, webs_controllers.listar_webs)
  * @param {string} id - The id of the web.
  * @middleware {get_id} - Validates the id.
  * @controller {listar_web} - Handles the request.
+ *
+ *  @openapi
+ * /api/v1/webs/{param}:
+ *  get:
+ *      tags:
+ *      - Webs
+ *      summary: List a web by id
+ *      parameters:
+ *          -   name: param
+ *              in: path
+ *              description: Web's id
+ *              schema:
+ *                  type: string
+ *                  example: 661a7b3705f8c0fa0ea62aa4
+ *      responses:
+ *          '200':
+ *              description: Returns the data
+ *          '500':
+ *              description: Wrong petition
  */
 router.get('/:param', global_validators.get_id, webs_controllers.listar_web)
 
@@ -38,6 +69,26 @@ router.get('/:param', global_validators.get_id, webs_controllers.listar_web)
  * @param {string} id - The id of the city.
  * @middleware {get_id, listar_doc} - Validates the id and lists the documents.
  * @controller {listar_webs_ciudad} - Handles the request.
+ *
+ *  @openapi
+ * /api/v1/webs/ciudad/{param}:
+ *  get:
+ *      tags:
+ *      - Webs
+ *      summary: List all webs by city
+ *      parameters:
+ *          -   name: param
+ *              in: path
+ *              description: City's id
+ *              required: true
+ *              schema:
+ *                  type: string
+ *                  example: Madrid
+ *      responses:
+ *          '200':
+ *              description: Returns the data
+ *          '500':
+ *              description: Wrong petition
  */
 router.get('/ciudad/:param', global_validators.get_id, global_validators.listar_doc, webs_controllers.listar_webs_ciudad)
 
@@ -49,6 +100,33 @@ router.get('/ciudad/:param', global_validators.get_id, global_validators.listar_
  * @param {string} actividad - The activity of the web.
  * @middleware {get_id, listar_doc} - Validates the id and lists the documents.
  * @controller {listar_webs_ciudad_actividad} - Handles the request.
+ *
+ *  @openapi
+ * /api/v1/webs/{param}/{param2}:
+ *  get:
+ *      tags:
+ *      - Webs
+ *      summary: List all webs by city and activity
+ *      parameters:
+ *          -   name: param
+ *              in: path
+ *              description: City's id
+ *              required: true
+ *              schema:
+ *                  type: string
+ *                  example: Madrid
+ *          -   name: param2
+ *              in: path
+ *              description: Activity's id
+ *              required: true
+ *              schema:
+ *                  type: string
+ *                  example: Tecnologia
+ *      responses:
+ *          '200':
+ *              description: Returns the data
+ *          '500':
+ *              description: Wrong petition
  */
 router.get('/ciudad/:param/:param2', global_validators.get_id, global_validators.listar_doc, webs_controllers.listar_webs_ciudad_actividad)
 
@@ -60,6 +138,63 @@ router.get('/ciudad/:param/:param2', global_validators.get_id, global_validators
  * @route {POST} /webs
  * @middleware {verificar_JWT, is_comercio_JWT, no_tiene_pagina, create_update_web} - Validates the request.
  * @controller {crear_web} - Handles the request.
+ *
+ *  @openapi
+ * /api/v1/webs:
+ *  post:
+ *      tags:
+ *      - Webs
+ *      summary: Create a web
+ *      security:
+ *          -   token_comercio: []
+ *      parameters:
+ *          -   name: ciudad
+ *              in: body
+ *              description: Web's city
+ *              required: true
+ *              schema:
+ *                  type: string
+ *                  example: Madrid
+ *          -   name: actividad
+ *              in: body
+ *              description: Web's activity
+ *              required: true
+ *              schema:
+ *                  type: string
+ *                  example: Tecnologia
+ *          -   name: titulo
+ *              in: body
+ *              description: Web's title
+ *              required: true
+ *              schema:
+ *                  type: string
+ *                  example: Telefonica
+ *          -  name: resumen
+ *             in: body
+ *             description: Web's summary
+ *             required: true
+ *             schema:
+ *                 type: string
+ *                 example: "Resumen de la web"
+ *          -   name: textos
+ *              in: body
+ *              description: Web's texts
+ *              required: true
+ *              schema:
+ *                  type: array
+ *                  example: ['texto1', 'texto2']
+ *          -   name: fotos
+ *              in: body
+ *              description: Web's photos
+ *              required: true
+ *              schema:
+ *                  type: array
+ *                  example: ['foto1', 'foto2']
+ *      responses:
+ *          '200':
+ *              description: Returns the data
+ *          '500':
+ *              description: Wrong petition
  */
 router.post('/', usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_comercio_JWT, comercios_middlewares.no_tiene_pagina, webs_validators.create_update_web, webs_controllers.crear_web)
 
@@ -70,6 +205,11 @@ router.post('/', usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_com
  * @param {string} id - The id of the web.
  * @middleware {verificar_JWT, is_usuario_JWT, get_id, create_resenia} - Validates the request.
  * @controller {crear_resenia} - Handles the request.
+ *      responses:
+ *          '200':
+ *              description: Returns the data
+ *          '500':
+ *              description: Wrong petition
  */
 router.post('/:param/resenia', usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_usuario_JWT, global_validators.get_id, webs_validators.create_resenia, webs_controllers.crear_resenia)
 
@@ -82,8 +222,118 @@ router.post('/:param/resenia', usuarios_middlewares.verificar_JWT, usuarios_midd
  * @route {PUT|PATCH} /webs
  * @middleware {verificar_JWT, is_comercio_JWT, tiene_pagina, create_update_web|patch_web} - Validates the request.
  * @controller {editar_web} - Handles the request.
+ *
+ *  @openapi
+ * /api/v1/webs:
+ *  put:
+ *      tags:
+ *      - Webs
+ *      summary: Create a web
+ *      security:
+ *          -   token_comercio: []
+ *      parameters:
+ *          -   name: ciudad
+ *              in: body
+ *              description: Web's city
+ *              required: true
+ *              schema:
+ *                  type: string
+ *                  example: Madrid
+ *          -   name: actividad
+ *              in: body
+ *              description: Web's activity
+ *              required: true
+ *              schema:
+ *                  type: string
+ *                  example: Tecnologia
+ *          -   name: titulo
+ *              in: body
+ *              description: Web's title
+ *              required: true
+ *              schema:
+ *                  type: string
+ *                  example: Telefonica
+ *          -  name: resumen
+ *             in: body
+ *             description: Web's summary
+ *             required: true
+ *             schema:
+ *                 type: string
+ *                 example: "Resumen de la web"
+ *          -   name: textos
+ *              in: body
+ *              description: Web's texts
+ *              required: true
+ *              schema:
+ *                  type: array
+ *                  example: ['texto1', 'texto2']
+ *          -   name: fotos
+ *              in: body
+ *              description: Web's photos
+ *              required: true
+ *              schema:
+ *                  type: array
+ *                  example: ['foto1', 'foto2']
+ *      responses:
+ *          '200':
+ *              description: Returns the data
+ *          '500':
+ *              description: Wrong petition
  */
 router.put('/', usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_comercio_JWT, comercios_middlewares.tiene_pagina, webs_validators.create_update_web, webs_controllers.editar_web)
+
+/**
+ *  @openapi
+ * /api/v1/webs:
+ *  patch:
+ *      tags:
+ *      - Webs
+ *      summary: Create a web
+ *      security:
+ *          -   token_comercio: []
+ *      parameters:
+ *          -   name: ciudad
+ *              in: body
+ *              description: Web's city
+ *              schema:
+ *                  type: string
+ *                  example: Madrid
+ *          -   name: actividad
+ *              in: body
+ *              description: Web's activity
+ *              schema:
+ *                  type: string
+ *                  example: Tecnologia
+ *          -   name: titulo
+ *              in: body
+ *              description: Web's title
+ *              schema:
+ *                  type: string
+ *                  example: Telefonica
+ *          -  name: resumen
+ *             in: body
+ *             description: Web's summary
+ *             schema:
+ *                 type: string
+ *                 example: "Resumen de la web"
+ *          -   name: textos
+ *              in: body
+ *              description: Web's texts
+ *              schema:
+ *                  type: array
+ *                  example: ['texto1', 'texto2']
+ *          -   name: fotos
+ *              in: body
+ *              description: Web's photos
+ *              schema:
+ *                  type: array
+ *                  example: ['foto1', 'foto2']
+ *      responses:
+ *          '200':
+ *              description: Returns the data
+ *          '500':
+ *              description: Wrong petition
+ */
 router.patch('/', usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_comercio_JWT, comercios_middlewares.tiene_pagina, webs_validators.patch_web, webs_controllers.editar_web)
 
 /**
@@ -95,6 +345,28 @@ router.patch('/', usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_co
  * @queryparam {boolean} [logico] - Whether to perform a logical deletion.
  * @middleware {verificar_JWT, is_comercio_JWT, tiene_pagina, delete_doc} - Validates the request.
  * @controller {eliminar_web} - Handles the request.
+ *
+ *  @openapi
+ * /api/v1/webs:
+ *  delete:
+ *      tags:
+ *      - Webs
+ *      summary: Delete a web
+ *      security:
+ *          -   token_comercio: []
+ *      parameters:
+ *          -   name: logico
+ *              in: query
+ *              description: Whether to perform a logical deletion
+ *              schema:
+ *                  type: boolena
+ *                  example: true
+ *                  default: false
+ *      responses:
+ *          '200':
+ *              description: Returns the data
+ *          '500':
+ *              description: Wrong petition
  */
 router.delete('/', usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_comercio_JWT, comercios_middlewares.tiene_pagina, global_validators.delete_doc, webs_controllers.eliminar_web)
 
