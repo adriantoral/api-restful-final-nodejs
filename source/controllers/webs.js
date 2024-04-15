@@ -60,13 +60,17 @@ const listar_webs_ciudad_actividad = async (req, res) => {
 
 /**
  * Creates a review for a specific web.
- * @param {Object} req - The request object.
- * @param {Object} res - The response object.
- * @returns {Promise} A promise that resolves to a response object.
+ * @async
+ * @function
+ * @param {Object} req - Express request object. The id of the web is in req.MATCHED.param and the review's information is in req.MATCHED.
+ * @param {Object} res - Express response object.
+ * @returns {Promise<Response>} A promise that resolves to an Express response object.
+ * @throws {Error} If there is an error creating the review.
  */
 const crear_resenia = async (req, res) => {
     try {
         const {param, ...resenia} = req.MATCHED
+        resenia.usuario = req.JWT.id
         return good_response(res, await webs_services.crear_resenia(param, resenia))
     } catch (error) {
         return bad_response(res, 500, error)

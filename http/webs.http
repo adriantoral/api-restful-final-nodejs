@@ -76,3 +76,13 @@ Authorization: Bearer {{token}}
 ### /api/v1/webs (fisico)
 DELETE http://localhost:3000/api/v1/webs
 Authorization: Bearer {{token}}
+
+### /api/v1/webs/:param/resenia
+POST http://localhost:3000/api/v1/webs/661a7b3705f8c0fa0ea62aa4/resenia
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "resenia": "Me gusta mucho esta web",
+  "puntuacion": 5
+}

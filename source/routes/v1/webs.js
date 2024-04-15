@@ -202,9 +202,43 @@ router.post('/', usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_com
  * Route for creating a review for a web.
  * @name create_review
  * @route {POST} /webs/:param/resenia
- * @param {string} id - The id of the web.
- * @middleware {verificar_JWT, is_usuario_JWT, get_id, create_resenia} - Validates the request.
+ * @param {string} param - The id of the web.
+ * @middleware {verificar_JWT} - Verifies the JWT token.
+ * @middleware {is_usuario_JWT} - Checks if the JWT token belongs to a user.
+ * @middleware {get_id} - Validates the id.
+ * @middleware {create_resenia} - Validates the review's information.
  * @controller {crear_resenia} - Handles the request.
+ *
+ *  @openapi
+ * /api/v1/webs/{param}/resenia:
+ *  post:
+ *      tags:
+ *      - Webs
+ *      summary: Create a review for a web
+ *      security:
+ *          -   token_usuario: []
+ *      parameters:
+ *          -   name: param
+ *              in: path
+ *              description: Web's id
+ *              required: true
+ *              schema:
+ *                  type: string
+ *                  example: 661a7b3705f8c0fa0ea62aa4
+ *          -   name: resenia
+ *              in: body
+ *              description: Review's text
+ *              required: true
+ *              schema:
+ *                  type: string
+ *                  example: "This is a great website!"
+ *          -   name: puntuacion
+ *              in: body
+ *              description: Review's score
+ *              required: true
+ *              schema:
+ *                  type: number
+ *                  example: 5
  *      responses:
  *          '200':
  *              description: Returns the data

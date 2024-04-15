@@ -6,7 +6,6 @@ const {validate} = require('.')
  * @type {Array}
  */
 const create_resenia = [
-    body('email', 'Type: String').exists().notEmpty().isString(),
     body('resenia', 'Type: String').exists().notEmpty().isString(),
     body('puntuacion', 'Type: Number').exists().notEmpty().isInt(),
     validate
