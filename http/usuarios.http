@@ -1,3 +1,6 @@
+# Token Usuario
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjY2MWE4YzAwYTgzYmY3NjQyYzA0OTRkZCIsImVtYWlsIjoidXN1YXJpb0B1c3VhcmlvLmNvbSIsInRpcG8iOiJ1c3VhcmlvIiwiaWF0IjoxNzEzMDE1ODEzLCJleHAiOjE3MTMxMDIyMTN9.tWkHub16bOWjhZ-3tD_tNbBJXh8_vhwk5Eve8BCoJls
+
 ### /api/v1/usuarios/signin
 POST http://localhost:3000/api/v1/usuarios/signin
 Content-Type: application/json
@@ -51,6 +54,29 @@ Content-Type: application/json
   ],
   "permiteRecibirOfertas": true
 }
+
+### /api/v1/usuarios/me
+PUT http://localhost:3000/api/v1/usuarios/me
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+  "nombre": "Usuario mejorado",
+  "email": "usuario@usuario.com",
+  "password": "123456",
+  "edad": 21,
+  "ciudad": "Madrid",
+  "rol": "usuario",
+  "intereses": [
+    "tecnologia",
+    "deportes"
+  ],
+  "permiteRecibirOfertas": true
+}
+
+### /api/v1/usuarios/me
+DELETE http://localhost:3000/api/v1/usuarios/me
+Authorization: Bearer {{token}}
 
 ### /api/v1/usuarios/ciudad/Madrid
 GET http://localhost:3000/api/v1/usuarios/ciudad/Madrid

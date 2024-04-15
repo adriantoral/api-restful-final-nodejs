@@ -69,6 +69,48 @@ const signup = async (usuario) => {
     }
 }
 
+/**
+ * Updates a user's information.
+ * @async
+ * @function
+ * @param {string} id - The id of the user to update.
+ * @param {Object} usuario - The new information for the user.
+ * @returns {Promise<Object>} The updated user object.
+ * @throws {Error} If there is an error updating the user.
+ */
+const update_user = async (id, usuario) => {
+    try {
+        return await Usuario.findByIdAndUpdate(id, usuario)
+    } catch (e) {
+        throw new Error(e.message)
+    }
+}
+
+/**
+ * Deletes a user.
+ * @async
+ * @function
+ * @param {string} id - The id of the user to delete.
+ * @returns {Promise<Object>} The deleted user object.
+ * @throws {Error} If there is an error deleting the user.
+ */
+const delete_user = async (id) => {
+    try {
+        return await Usuario.findByIdAndDelete(id)
+    } catch (e) {
+        throw new Error(e.message)
+    }
+}
+
+/**
+ * Retrieves users based on certain criteria.
+ * @async
+ * @function
+ * @param {Object} searchBy - The criteria to search by.
+ * @param {string} sortBy - The field to sort the results by.
+ * @returns {Promise<Array>} The list of users that match the criteria.
+ * @throws {Error} If there is an error retrieving the users.
+ */
 const get_users = async (searchBy, sortBy) => {
     try {
         const data = await Usuario.find(searchBy)
@@ -85,5 +127,7 @@ module.exports = {
     get_usuario,
     signin,
     signup,
+    update_user,
+    delete_user,
     get_users
 }
