@@ -1,6 +1,8 @@
 const {Comercio} = require('../models') // Importing the Comercio model
 const jwt = require("jsonwebtoken") // Importing the jsonwebtoken for generating tokens
 
+const send_email = require('../config/nodemailer')
+
 /**
  * Function to get a specific comercio
  * @param {String} cif - The CIF of the comercio
@@ -47,15 +49,21 @@ const listar_comercio = async (cif) => {
 }
 
 /**
- * Function to create a comercio
- * @param {Object} comercio - The comercio object
- * @returns {Object} The created comercio object
- * @throws {Error} If there is an error
+ * Creates a new comercio.
+ * This function creates a new comercio in the database, generates a JWT token for it,
+ * sends a confirmation email to the comercio, and returns the created comercio object along with its JWT token.
+ * @async
+ * @function
+ * @param {Object} comercio - The comercio's information.
+ * @returns {Promise<Object>} The created comercio object along with its JWT token.
+ * @throws {Error} If there is an error creating the comercio.
  */
 const crear_comercio = async (comercio) => {
     try {
         const data = await Comercio.create(comercio)
-        return {...data._doc, jwt: jwt.sign({id: data._id, cif: data.cif, tipo: "comercio"}, process.env.JWT_SECRET)}
+        const response = {...data._doc, jwt: jwt.sign({id: data._id, cif: data.cif, tipo: "comercio"}, process.env.JWT_SECRET)}
+        await send_email(data.email, "Comercio registrado correctamente", JSON.stringify(response))
+        return response
     } catch (e) {
         throw new Error(e.message)
     }

@@ -22,7 +22,7 @@ Content-Type: application/json
   "nombre": "Mi Comercio",
   "cif": "MICIF12345",
   "direccion": "Calle Falsa 123",
-  "email": "micomercio@comercio.com",
+  "email": "adrian.toral@live.u-tad.com",
   "telefono": "+34123456789"
 }
 
@@ -34,7 +34,7 @@ Content-Type: application/json
 {
   "nombre": "Mi Comercio mejorado",
   "direccion": "Calle Falsa 123",
-  "email": "micomercio@comercio.com",
+  "email": "adrian.toral@live.u-tad.com",
   "telefono": "+34123456789"
 }
 
@@ -45,7 +45,7 @@ Content-Type: application/json
 
 {
   "nombre": "Mi Comercio mejorado",
-  "email": "micomerciomejorado2@comercio.com"
+  "email": "adrian.toral@live.u-tad.com"
 }
 
 ### /api/v1/comercios/:param (logico)

@@ -1,6 +1,8 @@
 const jwt = require('jsonwebtoken')
 const bcryptjs = require("bcryptjs")
 
+const send_email = require('../config/nodemailer')
+
 const {Usuario} = require('../models')
 
 /**
@@ -52,6 +54,8 @@ const signin = async (usuario) => {
 
 /**
  * Signs up a user.
+ * This function hashes the user's password using bcryptjs, creates a new user in the database,
+ * sends a confirmation email to the user, and returns the created user object.
  * @async
  * @function
  * @param {Object} usuario - The user's information.
@@ -63,7 +67,9 @@ const signin = async (usuario) => {
 const signup = async (usuario) => {
     try {
         usuario.password = bcryptjs.hashSync(usuario.password)
-        return await Usuario.create(usuario)
+        const data = await Usuario.create(usuario)
+        await send_email(data.email, "Usuario registrado correctamente", JSON.stringify(data))
+        return data
     } catch (e) {
         throw new Error(e.message)
     }
