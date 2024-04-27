@@ -3,6 +3,7 @@ const express = require("express")
 const webs_validators = require("../../validators/webs")
 const webs_controllers = require("../../controllers/webs")
 
+const webs_middleware = require("../../middlewares/webs")
 const usuarios_middlewares = require("../../middlewares/usuarios")
 const comercios_middlewares = require("../../middlewares/comercios")
 
@@ -403,5 +404,39 @@ router.patch('/', usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_co
  *              description: Wrong petition
  */
 router.delete('/', usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_comercio_JWT, comercios_middlewares.tiene_pagina, global_validators.delete_doc, webs_controllers.eliminar_web)
+
+/**
+ * Route for uploading a photo for a web.
+ * The photo data is in the request body.
+ * @name upload_photo
+ * @route {POST} /webs/subir/foto
+ * @middleware {verificar_JWT} - Verifies the JWT token.
+ * @middleware {is_comercio_JWT} - Checks if the JWT token belongs to a commerce.
+ * @middleware {subir_foto} - Validates the photo's information.
+ * @middleware {upload_file} - Handles the file upload.
+ * @middleware {inject_file_path_to_body} - Injects the file path to the request body.
+ * @controller {subir_foto} - Handles the request.
+ *
+ *  @openapi
+ * /api/v1/webs/subir/foto:
+ *  post:
+ *      tags:
+ *      - Webs
+ *      summary: Upload a photo for a web
+ *      security:
+ *          -   token_comercio: []
+ *      parameters:
+ *          -   name: foto
+ *              in: formData
+ *              description: The photo to upload
+ *              required: true
+ *              type: file
+ *      responses:
+ *          '200':
+ *              description: Returns the data
+ *          '500':
+ *              description: Wrong petition
+ */
+router.post("/subir/foto", usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_comercio_JWT, webs_middleware.upload_file.fields([{name: "foto", maxCount: 1}]), webs_middleware.inject_file_path_to_body, webs_validators.subir_foto, webs_controllers.subir_foto)
 
 module.exports = router

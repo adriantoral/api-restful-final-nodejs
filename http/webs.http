@@ -66,7 +66,10 @@ Content-Type: application/json
 
 {
   "ciudad": "Barcelona",
-  "titulo": "Telefonica Mejorada"
+  "titulo": "Telefonica Mejorada",
+  "fotos": [
+    "./files/661a8d8ba83bf7642c0494f7/1714209118898.jpeg"
+  ]
 }
 
 ### /api/v1/webs?logico=true (logico)
@@ -86,3 +89,15 @@ Content-Type: application/json
   "resenia": "Me gusta mucho esta web",
   "puntuacion": 5
 }
+
+### /api/v1/webs/subir/foto
+POST http://localhost:3000/api/v1/webs/subir/foto
+Authorization: Bearer {{token}}
+Content-Type: multipart/form-data; boundary=WebAppBoundary
+
+--WebAppBoundary
+Content-Disposition: form-data; name="foto"; filename="foto.jpeg"
+Content-Type: image/jpeg
+
+< comercios.http
+--WebAppBoundary

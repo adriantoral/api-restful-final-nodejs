@@ -26,6 +26,7 @@ app.use(cors()) // Enabling CORS for all routes
 
 // Using Express.js middleware for parsing JSON
 app.use(express.json()) // Enabling JSON body parsing for all routes
+app.use('/files', express.static('./files'))
 
 // Using the DDoS middleware for preventing DDoS attacks
 app.use(app_ddos.express) // Using the DDoS middleware

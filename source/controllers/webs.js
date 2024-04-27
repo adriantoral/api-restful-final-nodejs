@@ -126,6 +126,23 @@ const eliminar_web = async (req, res) => {
     }
 }
 
+/**
+ * Uploads a photo.
+ * @async
+ * @function
+ * @param {Object} req - Express request object. The photo data is in req.MATCHED.
+ * @param {Object} res - Express response object.
+ * @returns {Promise<Response>} A promise that resolves to an Express response object.
+ * @throws {Error} If there is an error uploading the photo.
+ */
+const subir_foto = async (req, res) => {
+    try {
+        return good_response(res, req.MATCHED)
+    } catch (error) {
+        return bad_response(res, 500, error)
+    }
+}
+
 module.exports = {
     listar_webs,
     listar_web,
@@ -134,5 +151,6 @@ module.exports = {
     crear_resenia,
     crear_web,
     editar_web,
-    eliminar_web
+    eliminar_web,
+    subir_foto
 }

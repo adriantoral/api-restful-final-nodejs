@@ -39,8 +39,20 @@ const patch_web = [
     validate
 ]
 
+/**
+ * Validation rules for uploading a photo.
+ * @type {Array}
+ * @property {function} body('foto', 'Type: String, Max-Length: None') - Checks if 'foto' exists, is not empty, and is a string. This check is optional.
+ * @property {function} validate - A custom validation function.
+ */
+const subir_foto = [
+    body('foto', 'Type: String, Max-Length: None').exists().notEmpty().isString(),
+    validate
+]
+
 module.exports = {
     create_resenia,
     create_update_web,
-    patch_web
+    patch_web,
+    subir_foto
 }
