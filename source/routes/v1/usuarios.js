@@ -202,7 +202,7 @@ router.post('/signup', usuarios_validators.signup, usuarios_controllers.signup)
  *          '500':
  *              description: Wrong petition
  */
-router.put('/me', usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_usuario_JWT, usuarios_validators.signup, usuarios_controllers.update_user)
+router.put('/me', usuarios_middlewares.verificar_JWT, usuarios_middlewares.is_usuario_JWT, usuarios_validators.update_user, usuarios_controllers.update_user)
 
 /**
  * Route for deleting a user.
