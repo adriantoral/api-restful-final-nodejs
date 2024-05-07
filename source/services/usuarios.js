@@ -86,6 +86,7 @@ const signup = async (usuario) => {
  */
 const update_user = async (id, usuario) => {
     try {
+        usuario.password = bcryptjs.hashSync(usuario.password)
         return await Usuario.findByIdAndUpdate(id, usuario)
     } catch (e) {
         throw new Error(e.message)
