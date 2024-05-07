@@ -40,6 +40,9 @@ const usuario_schema = new mongoose.Schema(
         intereses: {
             type: Array
         },
+        resenias: {
+            type: Array
+        },
         permiteRecibirOfertas: {
             type: Boolean,
             default: false

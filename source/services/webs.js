@@ -1,4 +1,4 @@
-const {Web} = require('../models')
+const {Web, Usuario} = require('../models')
 
 /**
  * Lists all the webs sorted by the provided parameter.
@@ -90,6 +90,14 @@ const listar_webs_ciudad_actividad = async (ciudad, actividad, sortBy) => {
  */
 const crear_resenia = async (id, resenia) => {
     try {
+        const usuario = await Usuario.findOne({_id: resenia.usuario})
+        if (!usuario)
+            throw new Error('Usuario no encontrado')
+
+        if (usuario.resenias.includes(id))
+            throw new Error('Ya has dejado una resenia en esta web')
+
+        await Usuario.findOneAndUpdate({_id: resenia.usuario}, {"$push": {resenias: id}})
         return await Web.findOneAndUpdate({_id: id}, {"$push": {resenias: resenia}})
     } catch (e) {
         throw new Error(e.message)
