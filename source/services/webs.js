@@ -8,10 +8,23 @@ const {Web} = require('../models')
  */
 const listar_webs = async (sortBy) => {
     try {
-        const data = await Web.find({})
+        const
+            data = await Web.find({}),
+            data_procesado = data
+                .map(
+                    web => {
+                        let total = 0
+                        web.resenias
+                            .map(
+                                resenia => total += resenia.puntuacion
+                            )
+                        return {...web._doc, score: (total / web.resenias.length) || 0}
+                    }
+                )
+
         return sortBy
-            ? data.sort((a, b) => a[sortBy] < b[sortBy] ? 1 : -1)
-            : data
+            ? data_procesado.sort((a, b) => a[sortBy] < b[sortBy] ? 1 : -1)
+            : data_procesado
     } catch (e) {
         throw new Error(e.message)
     }
